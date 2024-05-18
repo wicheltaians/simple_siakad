@@ -20,8 +20,8 @@ class UserController extends Controller
 
     public function index(): View
     {
-       $user = User::latest()->paginate(10);
-       return view('user.index',compact('user'));
+       $dataUser = User::latest()->paginate(10);
+       return view('user.index',compact('dataUser'));
     }
 
     public function create(): View
@@ -59,9 +59,9 @@ class UserController extends Controller
 
     public function edit(string $id): View
     {
-        $pengguna = User::findOrFail($id);
+        $dataUser = User::findOrFail($id);
 
-        return view('user.edit', compact('pengguna'));
+        return view('user.edit', compact('dataUser'));
     }
 
     public function update(Request $request, $id): RedirectResponse
@@ -74,8 +74,8 @@ class UserController extends Controller
             'level'         => 'required'
         ]);
 
-        $pengguna = User::findOrFail($id);
-        $pengguna->update([
+        $dataUser = User::findOrFail($id);
+        $dataUser->update([
                 'username'  => $request->username,
                 'email'     => $request->email,
                 'password'  => md5($request->password),
